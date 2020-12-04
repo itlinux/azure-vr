@@ -1,5 +1,7 @@
 = VR for Azure
+
 This is just creating the initial RG, vnet, and two subnets
+
 
 
 STEPS:
