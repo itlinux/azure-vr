@@ -1,0 +1,80 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Create a resource group
+      azure_rm_resourcegroup:
+        name: "{{ rg_name }}"
+        location: "{{ location }}"
+      tags:
+        - create_rg
+        - create_all
+
+    - name: Delete a resource group
+      azure_rm_resourcegroup:
+        name: "{{ rg_name }}"
+        state: absent
+      tags:
+        - delete_rg
+
+    - name: Create a virtual network
+      azure_rm_virtualnetwork:
+        resource_group: "{{ rg_name }}"
+        name: "{{ vnetname }}"
+        address_prefixes_cidr:
+            - "10.1.0.0/16"
+            - "172.100.0.0/16"
+        dns_servers:
+            - "127.0.0.1"
+            - "127.0.0.2"
+      tags:
+        - create_vnet
+        - create_all
+
+    - name: Delete a virtual network
+      azure_rm_virtualnetwork:
+        resource_group: "{{ rg_name }}"
+        name: "{{ vnetname }}"
+        state: absent
+      tags:
+        - delete_vnet
+
+    - name: Create subnet "{{ vrsubnetname1 }}"
+      azure_rm_subnet:
+        resource_group: "{{ rg_name }}"
+        virtual_network_name: "{{ vnetname }}"
+        name: "{{ vrsubnetname1 }}"
+        address_prefix_cidr: "{{ prefix_1 }}"
+      tags:
+        - create_subnet_vr
+        - create_all
+
+    - name: Create subnet "{{ vrsubnetname2 }}"
+      azure_rm_subnet:
+        resource_group: "{{ rg_name }}"
+        virtual_network_name: "{{ vnetname }}"
+        name: "{{ vrsubnetname2 }}"
+        address_prefix_cidr: "{{ prefix_2 }}"
+      tags:
+        - create_subnet_gateway
+        - create_all
+
+    - name: Delete subnet "{{ vnetname }}"
+      azure_rm_subnet:
+        resource_group: "{{ rg_name }}"
+        virtual_network_name: "{{ vnetname }}"
+        name: "{{ vrsubnetname1 }}"
+        state: absent
+      tags:
+        - delete_subnet_1
+
+    - name: Delete subnet "{{ vrsubnetname2 }}"
+      azure_rm_subnet:
+        resource_group: "{{ rg_name }}"
+        virtual_network_name: "{{ vrsubnetname2 }}"
+        name: "{{ vrsubnetname2 }}"
+        state: absent
+      tags:
+        - delete_subnet_2

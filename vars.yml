@@ -1,0 +1,11 @@
+rg_name: removirtualrouter
+location: westus2
+
+vnetname: vrVirtualNetwork
+
+vrsubnetname1: vrSubnet
+prefix_1: "10.1.0.0/24"
+
+vrsubnetname2: GatewaySubnet
+prefix_2: "10.1.1.0/24"
+
