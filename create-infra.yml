@@ -24,11 +24,11 @@
         resource_group: "{{ rg_name }}"
         name: "{{ vnetname }}"
         address_prefixes_cidr:
-            - "10.1.0.0/16"
-            - "172.100.0.0/16"
+            - "{{ base_cidr_1 }}"
+            - "{{ base_cidr_2 }}"
         dns_servers:
-            - "127.0.0.1"
-            - "127.0.0.2"
+            - "{{ dns_1 }}"
+            - "{{ dns_2 }}"
       tags:
         - create_vnet
         - create_all
