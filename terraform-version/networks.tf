@@ -1,3 +1,6 @@
+locals {
+  subnet_prefixes = var.address_space
+}
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.prefix}-vnet"
   location            = var.location
@@ -11,6 +14,6 @@ resource "azurerm_subnet" "subnet" {
   name                      = var.subnet_names[count.index]
   virtual_network_name      = azurerm_virtual_network.vnet.name
   resource_group_name       = azurerm_resource_group.rg.name
-  address_prefixes          = [var.subnet_prefixes[count.index]]
+  address_prefixes          = [cidrsubnet(local.subnet_prefixes, 8, 1 + count.index)]
   count                     = length(var.subnet_names)
 }
