@@ -60,3 +60,7 @@ Group List
     "id": "/subscriptions/xxxxxxxxxxxxxxxxxxxxx/resourceGroups/rm_big_rg",
     "name": "rm_big_rg",
 ----
+
+== Terraform version
+I have created a tf version so it will create a RG, a vnet, and 2 subnets
+

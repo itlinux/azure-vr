@@ -1,0 +1,2 @@
+terraform-version/.terraform/
+terraform-version/*state
