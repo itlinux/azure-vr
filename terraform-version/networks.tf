@@ -11,9 +11,10 @@ resource "azurerm_virtual_network" "vnet" {
 }
 
 resource "azurerm_subnet" "subnet" {
-  name                      = var.subnet_names[count.index]
-  virtual_network_name      = azurerm_virtual_network.vnet.name
-  resource_group_name       = azurerm_resource_group.rg.name
-  address_prefixes          = [cidrsubnet(local.subnet_prefixes, 8, 1 + count.index)]
-  count                     = length(var.subnet_names)
+  depends_on           = [azurerm_virtual_network.vnet]
+  name                 = var.subnet_names[count.index]
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  resource_group_name  = azurerm_resource_group.rg.name
+  address_prefixes     = [cidrsubnet(local.subnet_prefixes, 8, 1 + count.index)]
+  count                = length(var.subnet_names)
 }
