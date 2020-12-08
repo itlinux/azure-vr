@@ -1,6 +1,6 @@
 variable "prefix" {
   description = "Default prefix to use with your resource names."
-  default     = "remo-vr-demo"
+  default     = "removirtualrouter"
 }
 
 variable "location" {
@@ -16,7 +16,7 @@ variable "address_space" {
 # If no values specified, this defaults to Azure DNS
 variable "dns_servers" {
   description = "The DNS servers to be used with vNet"
-  default     = []
+  default     = ["127.0.0.1","1.1.1.1"]
 }
 
 variable "subnet_names" {
@@ -32,3 +32,5 @@ variable "tags" {
     dev = "terraform"
   }
 }
+
+

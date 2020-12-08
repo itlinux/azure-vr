@@ -22,7 +22,7 @@ output "vnet_subnets" {
   value = azurerm_subnet.subnet.*.id
 }
 
-output "security_group_id" {
-  value = azurerm_network_security_group.security_group.id
-}
+# output "security_group_id" {
+#   value = azurerm_network_security_group.security_group.id
+# }
 
